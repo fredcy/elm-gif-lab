@@ -12,8 +12,8 @@ import RainbowLambda
 
 port blobURLs : Signal (Maybe String)
 
--- gif = RainbowLambda.gif
-gif = Sandbox.gif
+gif = RainbowLambda.gif
+-- gif = Sandbox.gif
 
 app = StartApp.start
   { init = GifLab.init gif

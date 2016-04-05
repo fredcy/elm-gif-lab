@@ -69,7 +69,7 @@ type Action
 
 update : Action -> Model -> (Model, Effects Action)
 update action model =
-  case action of
+  case action |> Debug.log "action" of
     Tick clockTime ->
       if not model.playing then
         ( { model | animationState = Nothing }, Effects.none )
@@ -135,8 +135,11 @@ viewIndividualFrames model =
 
 view : Signal.Address Action -> Model -> Html
 view address model =
-  case model.blobURL of
-    Nothing ->
-      viewIndividualFrames model
-    Just url ->
-      img [ src url ] [ ]
+  div []
+  [ h2 [] [ text "current frame" ]
+  , viewCurrentFrame model
+  , h2 [] [ text "individual frames" ]
+  , viewIndividualFrames model
+  , h2 [] [ text "blob" ]
+  , viewBlob model
+  ]
